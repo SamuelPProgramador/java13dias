@@ -4,7 +4,7 @@ public class Pelicula {
     private String nombre;
     private String autor;
 
-    public Pelicula(){}
+    public Pelicula(String buscar){}
     public Pelicula(String nombre, String autor){
         this.nombre = nombre;
         this.autor = autor;
@@ -46,10 +46,7 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return "Pelicula:\n" +
-                "Nombre= '" + nombre + '\'' +
-                ",\nAutor= '" + autor + '\''
-                 + "\n";
+        return this.nombre + " " + this.autor;
     }
 
     public static void main(String[] args) {
