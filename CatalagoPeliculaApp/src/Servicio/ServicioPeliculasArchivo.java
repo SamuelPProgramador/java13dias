@@ -36,8 +36,8 @@ public class ServicioPeliculasArchivo implements  IServicioPeliculas{
             linea = entrada.readLine();
             //leemos toda las liena
             while (linea != null){
-                var pelicula = new Pelicula(linea);
-                System.out.println(pelicula);
+               // var pelicula = new Pelicula(linea);
+                System.out.println(linea);
                 //ante de cerrar el ciclo volvemos a leer la otra linea
                 linea = entrada.readLine();
             }
