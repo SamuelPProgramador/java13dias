@@ -1,5 +1,6 @@
 package bbsg.tareas.controlador;
 
+
 import bbsg.tareas.modelo.Tarea;
 import bbsg.tareas.servicio.TareaServicio;
 import javafx.collections.FXCollections;
@@ -50,8 +51,10 @@ public class IndexControlador implements Initializable {
     }
 
     private void listarTareas() {
+        logger.info("Ejecutando listado de tarea..");
         tareaList.clear();
-
+        tareaList.addAll(tareaServicio.listarTarea());
+        tareaTabla.setItems(tareaList);
     }
 
     private void configurarColummnas() {

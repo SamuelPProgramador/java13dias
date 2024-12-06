@@ -15,7 +15,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="tareaTabla" focusTraversable="false" layoutX="133.0" layoutY="88.0" prefHeight="200.0" prefWidth="376.0">
+      <TableView fx:id="tareaTabla" disable="true" fixedCellSize="11.0" layoutX="133.0" layoutY="88.0" prefHeight="200.0" prefWidth="376.0">
         <columns>
           <TableColumn fx:id="idTareaColumna" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="nombreTareaColumna" prefWidth="75.0" text="Tarea" />
