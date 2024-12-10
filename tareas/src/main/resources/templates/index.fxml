@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane disable="true" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bbsg.tareas.controlador.IndexControlador">
+<AnchorPane prefHeight="341.0" prefWidth="609.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bbsg.tareas.controlador.IndexControlador">
    <children>
-      <Label layoutX="195.0" layoutY="30.0" mouseTransparent="true" prefHeight="37.0" prefWidth="218.0" scaleShape="false" text="Sistema de Tareas" textAlignment="CENTER" textFill="#01c4ff">
+      <Label layoutX="193.0" layoutY="14.0" mouseTransparent="true" prefHeight="37.0" prefWidth="218.0" scaleShape="false" text="Sistema de Tareas" textAlignment="CENTER" textFill="#01c4ff">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -15,12 +15,30 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="tareaTabla" disable="true" fixedCellSize="11.0" layoutX="133.0" layoutY="88.0" prefHeight="200.0" prefWidth="376.0">
+      <AnchorPane layoutX="14.0" layoutY="67.0" prefHeight="204.0" prefWidth="208.0">
+         <children>
+            <Label layoutX="15.0" layoutY="24.0" prefHeight="17.0" prefWidth="91.0" text="Tarea" />
+            <Label layoutX="15.0" layoutY="93.0" text="Responsable" />
+            <Label layoutX="24.0" layoutY="153.0" prefHeight="17.0" prefWidth="74.0" text="Estatus" />
+            <TextField id="nombreTareaTexto" fx:id="nombreTareaTexto" layoutX="15.0" layoutY="54.0" />
+            <TextField id="nombreResponsableTexto" fx:id="responsableTexto" layoutX="15.0" layoutY="118.0" />
+            <TextField id="nombreEstatusTexto" fx:id="estatusTexto" layoutX="15.0" layoutY="170.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="10.0" layoutY="290.0" prefHeight="37.0" prefWidth="584.0">
+         <children>
+            <Button fx:id="agregarBoton" layoutX="28.0" layoutY="6.0" mnemonicParsing="false" onAction="#agregarTarea" text="Agregar" />
+            <Button fx:id="modificarBoton" layoutX="110.0" layoutY="6.0" mnemonicParsing="false" onAction="#modificarTarea" text="Modificar" />
+            <Button fx:id="eliminarBoton" layoutX="211.0" layoutY="6.0" mnemonicParsing="false" onAction="#eliminarTarea" text="Eliminar" />
+            <Button fx:id="limpiarBoton" layoutX="286.0" layoutY="6.0" mnemonicParsing="false" onAction="#limpiarFormulario" text="Limpiar" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="tareaTabla" layoutX="257.0" layoutY="60.0" onMouseClicked="#cargarTareaFormulario" prefHeight="200.0" prefWidth="301.0">
         <columns>
           <TableColumn fx:id="idTareaColumna" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="nombreTareaColumna" prefWidth="75.0" text="Tarea" />
-            <TableColumn fx:id="responsableColumna" prefWidth="92.0" text="Responsable" />
-            <TableColumn fx:id="estatusColumna" prefWidth="74.0" text="Estatus" />
+            <TableColumn fx:id="responsableColumna" prefWidth="75.0" text="Responsable" />
+            <TableColumn fx:id="estatusColumna" prefWidth="75.0" text="Estatus" />
         </columns>
       </TableView>
    </children>
