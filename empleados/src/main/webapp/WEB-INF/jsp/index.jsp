@@ -14,6 +14,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Departamento</th>
                 <th scope="col">Sueldo</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -25,7 +26,31 @@
                     <td>
                         <fmt:setLocale value="es_DO" />
                         <fmt:formatNumber type="currency" value="${empleado.sueldo}" />
+                    </td>
 
+                    <td class="text-center">
+                        <c:set var="urlEditar">
+                            <c:url value="${application.contextPath}/editar">
+                                <c:param name="idEmpleado"
+                                         value="${empleado.idEmpleado}"/>
+                            </c:url>
+                        </c:set>
+
+                        <a href="${urlEditar}"
+                           class="btn btn-warning btn-sm me-3 bi bi-person-fill-up">
+                           Editar
+                        </a>
+
+                        <c:set var="urlEliminar">
+                            <c:url value="${application.contexPath}/eliminar">
+                                <c:param name="idEmpleado"
+                                         value="${empleado.idEmpleado}"/>
+                            </c:url>
+                        </c:set>
+                        <a href="${urlEliminar}"
+                           class="btn btn-danger btn-sm me-3 bi bi-person-dash" >
+                           Eliminar
+                        </a>
                     </td>
                 </tr>
             </c:forEach>
