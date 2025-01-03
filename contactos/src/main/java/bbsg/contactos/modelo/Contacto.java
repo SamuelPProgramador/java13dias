@@ -23,4 +23,15 @@ public class Contacto {
     String celular;
     String email;
 
+
+    @Override
+    public String toString() {
+        return "Contacto{" +
+                "idContacto=" + idContacto +
+                ", nombre='" + nombre + '\'' +
+                ", celular='" + celular + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
+
