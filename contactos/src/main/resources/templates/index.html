@@ -14,8 +14,8 @@
         <h3>Sistemas de Contactos</h3>
     </div>
     <div class="container">
-        <table class="table table table-bordered table-striped table-hover align-middle">
-            <thead class="text-dark text-center">
+        <table class="table  table-bordered table-striped table-hover align-middle">
+            <thead class="text-dark text-center  table-dark">
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
@@ -34,9 +34,12 @@
                 <td class="center">
                     <div class="container">
                         <a th:href="@{/editar/{id}(id=${contacto.idContacto})}"
-                        class="btn btn-warning bntn-sm me-3">Editar</a>
-                        
+                        class="btn btn-warning btn-sm me-3 ">
+                            <i class="bi bi-pencil-fill">  Editar</i></a>
 
+                        <a th:href="@{/eliminar/{id}(id=${contacto.idContacto})}"
+                           class="btn btn-danger btn-sm " >
+                            <i class="bi bi-trash-fill" >Eliminar </i> </a>
                     </div>
                 </td>
             </tr>
