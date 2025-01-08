@@ -20,6 +20,7 @@ public class IndexControlador {
     @Autowired
     CuentaServicio cuentaServicio;
     private List<Cuenta> cuentas;
+    private Cuenta cuentaSelecionada;
 
     private static final Logger logger = LoggerFactory.getLogger(IndexControlador.class);
 
@@ -35,8 +36,8 @@ public class IndexControlador {
         return cuentas;
     }
 
-    public void setCuentas(List<Cuenta> cuentas) {
-        this.cuentas = cuentas;
+    public Cuenta getCuentaSelecionada() {
+        return cuentaSelecionada;
     }
 
     @Override
@@ -44,7 +45,16 @@ public class IndexControlador {
         return "IndexControlador{" +
                 "cuentaServicio=" + cuentaServicio +
                 ", cuentas=" + cuentas +
+                ", cuentaSelecionada=" + cuentaSelecionada +
                 '}';
+    }
+
+    public void setCuentaSelecionada(Cuenta cuentaSelecionada) {
+        this.cuentaSelecionada = cuentaSelecionada;
+    }
+
+    public void setCuentas(List<Cuenta> cuentas) {
+        this.cuentas = cuentas;
     }
 
     @PostConstruct
@@ -57,5 +67,9 @@ public class IndexControlador {
         cuentas.forEach((cuenta) -> logger.info(cuenta.toString()));
     }
 
+    public void agregarCuenta(){
+        this.cuentaSelecionada = new Cuenta();
+
+    }
 
 }

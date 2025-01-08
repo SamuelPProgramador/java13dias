@@ -2,49 +2,93 @@
 <h:html xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:p="http://primefaces.org/ui">
-<h:head>
-    <title>Sistema de manejo de Cuenta</title>
-    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css"/>
-</h:head>
-<h:body>
+    <h:head>
+        <title>Sistema de manejo de Cuenta</title>
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css"/>
+    </h:head>
+    <h:body>
         <div class="card">
+            <h:form id="forma-cuenta">
+                <p:growl id="mensaje" showDetail="true"/>
+                <div class="card">
+                    <p:menubar>
+                        <p:menuitem value="Inicio" icon="pi pi-fw pi-user"
+                                    upadate=":forma-cuentas:cuentas-tabla"
+                                    actionListener="#{indexControlador.cargarDatos}"/>
 
+                        <p:menuitem value="Nueva Cuenta" icon="pi pi-fw pi-plus"
+                                    actionListener="#{indexControlador.agregarCuenta}"
+                                    update=":forma-modal:cuenta-ventana"
+                                    oncomplete="PF('ventanaModalCuenta').show()"/>
+                    </p:menubar>
 
-            <div class="card">
-                <p:dataTable value="#{indexControlador.cuentas}" var="cuenta">
-                    <f:facet name="header">
-                        <div class="flex justify-content-center
+                </div>
+                <div class="card">
+                    <p:dataTable value="#{indexControlador.cuentas}" var="cuenta"
+                                 id="cuentas-tabla" widgetVar="cuentasTabla">
+                        <f:facet name="header">
+                            <div class="flex justify-content-center
                         flex-wrap card-container yellow-container">
-                            <div class="flex align-items-center justify-content-center
+                                <div class="flex align-items-center justify-content-center
                                         w-20rem h-4rem bg-yellow-500 font-bold
                                         text-gray-900 border-round m-2">
-                                <h3>Sistema de Cuenta Bancaria</h3>
+                                    <h3>Sistema de Cuenta Bancaria</h3>
+                                </div>
                             </div>
+                        </f:facet>
+
+                        <p:column headerText="id">
+                            <h:outputText value="#{cuenta.idCuenta}"/>
+                        </p:column>
+
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{cuenta.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Tipo Cuenta">
+                            <h:outputText value="#{cuenta.tipoCuenta}"/>
+                        </p:column>
+
+                        <p:column headerText="Saldo">
+                            <h:outputText value="#{cuenta.saldo}">
+                                <f:convertNumber type="currency" currencySymbol="$"/>
+                            </h:outputText>
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+            </h:form>
+
+            <h:form id="forma-modal">
+                <p:dialog header="Destalles Cuenta" showEffect="fade"
+                          modal="true" widgetVar="ventanaModalCuenta"
+                          reposive="true">
+                    <p:outputPanel id="cuenta-ventana" class="ui-fluid">
+                        <div class="field">
+                           <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                            <p:inputText id="nombre"
+                                         value="#{indexControlador.cuentaSelecionada.nombre}"
+                                         requiered="true"/>
                         </div>
-                    </f:facet>
-
-                    <p:column headerText="id">
-                        <h:outputText value="#{cuenta.idCuenta}"/>
-                    </p:column>
-
-                    <p:column headerText="Nombre">
-                        <h:outputText value="#{cuenta.nombre}"/>
-                    </p:column>
-
-                    <p:column headerText="Tipo Cuenta">
-                        <h:outputText value="#{cuenta.tipoCuenta}"/>
-                    </p:column>
-
-                    <p:column headerText="Saldo">
-                        <h:outputText value="#{cuenta.saldo}">
-                            <f:convertNumber type="currency" currencySymbol="$"/>
-                        </h:outputText>
-                    </p:column>
-
-                </p:dataTable>
-            </div>
+                        <div class="field">
+                            <p:outputLabel for="tipoCuenta">Tipo Cuenta</p:outputLabel>
+                            <p:selectOneMenu id="tipoCuenta"
+                                            value="#{indexControlador.cuentaSelecionada.tipoCuenta}">
+                                <f:selectItem itemLabel="Seleciona" itemValue=""/>
+                                <f:selectItem itemLabel="ahorro" itemValue="Ahorro"/>
+                                <f:selectItem itemLabel="corriente" itemValue="Corriente"/>
+                                <f:selectItem itemLabel="infantil" itemValue="Infatil"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="field">
+                            <p:outputLabel for="saldo">Saldo</p:outputLabel>
+                            <p:inputNumber id="saldo"
+                                           value="#{indexControlador.cuentaSelecionada.saldo}"/>
+                        </div>
+                    </p:outputPanel>
+                </p:dialog>
+            </h:form>
 
         </div>
-</h:body>
-
+    </h:body>
 </h:html>
