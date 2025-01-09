@@ -8,7 +8,7 @@
     </h:head>
     <h:body>
         <div class="card">
-            <h:form id="forma-cuenta">
+            <h:form id="forma-cuentas">
                 <p:growl id="mensaje" showDetail="true"/>
                 <div class="card">
                     <p:menubar>
@@ -54,7 +54,18 @@
                                 <f:convertNumber type="currency" currencySymbol="$"/>
                             </h:outputText>
                         </p:column>
-
+                        <p:column>
+                            <p:commandButton value="Editar" icon="pi pi-pencil"
+                                             update=":forma-modal:cuenta-ventana"
+                                             oncomplete="PF('ventanaModalCuenta').show()"
+                                             process="@this"
+                                             class="ui-button-primary"
+                                             style="margin-right: .5rem">
+                                <f:setPropertyActionListener target="#{indexControlador.cuentaSelecionada}"
+                                                             value="#{cuenta}"/>
+                                <p:resetInput target=":forma-modal:cuenta-ventana"/>
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
                 </div>
             </h:form>

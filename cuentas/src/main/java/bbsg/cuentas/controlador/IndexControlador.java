@@ -71,6 +71,7 @@ public class IndexControlador {
     }
 
     public void agregarCuenta(){
+        logger.info("Se creo la cuenta");
         this.cuentaSelecionada = new Cuenta();
 
     }
@@ -79,11 +80,17 @@ public class IndexControlador {
         if(this.cuentaSelecionada.getIdCuenta() == null){
             this.cuentaServicio.guardarCuenta(this.cuentaSelecionada);
             this.cuentas.add(this.cuentaSelecionada);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cuenta Agregada"));
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Cuenta Agregada",
+                            "La cuenta se agregó correctamente."));
+
+//            FacesContext.getCurrentInstance().addMessage(null,
+//                                                    new FacesMessage("Cuenta Agregada"));
         }
         //ocultamos la ventana
-        PrimeFaces.current().executeScript("PF('ventanaModalCuenta').hiden()");
+        PrimeFaces.current().executeScript("PF('ventanaModalCuenta').hide()");
         //Actualizamos la pagina
-        PrimeFaces.current().ajax().update("forma-cuentas:mensajes", "forma-cuentas:cuentas-tabla");
+        PrimeFaces.current().ajax().update("forma-cuentas:mensajes",
+                                                        "forma-cuentas:cuentas-tabla");
     }
 }
