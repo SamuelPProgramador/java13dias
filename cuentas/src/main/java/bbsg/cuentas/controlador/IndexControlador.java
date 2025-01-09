@@ -77,6 +77,7 @@ public class IndexControlador {
     }
     public void guardarCuenta(){
         logger.info("Cuenta a guardar: " + this.cuentaSelecionada);
+        //Agregar
         if(this.cuentaSelecionada.getIdCuenta() == null){
             this.cuentaServicio.guardarCuenta(this.cuentaSelecionada);
             this.cuentas.add(this.cuentaSelecionada);
@@ -86,6 +87,13 @@ public class IndexControlador {
 
 //            FacesContext.getCurrentInstance().addMessage(null,
 //                                                    new FacesMessage("Cuenta Agregada"));
+        }
+
+        else { //modificar (update)
+            this.cuentaServicio.guardarCuenta(cuentaSelecionada);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Cuenta Actualizada..."));
+
         }
         //ocultamos la ventana
         PrimeFaces.current().executeScript("PF('ventanaModalCuenta').hide()");
