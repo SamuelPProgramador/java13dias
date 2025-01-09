@@ -3,8 +3,11 @@ package bbsg.cuentas.controlador;
 import bbsg.cuentas.modelo.Cuenta;
 import bbsg.cuentas.servicio.CuentaServicio;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import lombok.Data;
+import org.primefaces.PrimeFaces;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,5 +74,16 @@ public class IndexControlador {
         this.cuentaSelecionada = new Cuenta();
 
     }
-
+    public void guardarCuenta(){
+        logger.info("Cuenta a guardar: " + this.cuentaSelecionada);
+        if(this.cuentaSelecionada.getIdCuenta() == null){
+            this.cuentaServicio.guardarCuenta(this.cuentaSelecionada);
+            this.cuentas.add(this.cuentaSelecionada);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cuenta Agregada"));
+        }
+        //ocultamos la ventana
+        PrimeFaces.current().executeScript("PF('ventanaModalCuenta').hiden()");
+        //Actualizamos la pagina
+        PrimeFaces.current().ajax().update("forma-cuentas:mensajes", "forma-cuentas:cuentas-tabla");
+    }
 }
