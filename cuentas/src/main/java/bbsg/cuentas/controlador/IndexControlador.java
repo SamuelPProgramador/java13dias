@@ -82,11 +82,16 @@ public class IndexControlador {
             this.cuentaServicio.guardarCuenta(this.cuentaSelecionada);
             this.cuentas.add(this.cuentaSelecionada);
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Cuenta Agregada",
-                            "La cuenta se agregó correctamente."));
+                    new FacesMessage("Cuenta Guardad exitosamente.."));
+            PrimeFaces.current().ajax().update("forma-cuentas:mensajes",
+                    "forma-cuentas:cuentas:tabla");
 
 //            FacesContext.getCurrentInstance().addMessage(null,
-//                                                    new FacesMessage("Cuenta Agregada"));
+//                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Cuenta Agregada",
+//                            "La cuenta se agregó correctamente."));
+//
+////            FacesContext.getCurrentInstance().addMessage(null,
+////                                                    new FacesMessage("Cuenta Agregada"));
         }
 
         else { //modificar (update)
@@ -100,5 +105,21 @@ public class IndexControlador {
         //Actualizamos la pagina
         PrimeFaces.current().ajax().update("forma-cuentas:mensajes",
                                                         "forma-cuentas:cuentas-tabla");
+
+        //Reset
+        this.cuentaSelecionada = null;
+    }
+
+    public void eliminarCuenta(){
+        logger.info("Cuenta a eliminar" + this.cuentaSelecionada);
+        this.cuentaServicio.eliminarCuenta(this.cuentaSelecionada);
+        //eliminar el registro de lista de cuenta
+        this.cuentas.remove(this.cuentaSelecionada);
+        //Reset los objeto selecionado de la tabla
+        this.cuentaSelecionada = null;
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("Cuenta eliminada"));
+        PrimeFaces.current().ajax().update("forma-cuentas:mensajes",
+                "forma-cuentas:cuentas:tabla");
     }
 }
